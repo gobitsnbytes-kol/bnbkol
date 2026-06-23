@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Anton, JetBrains_Mono, Inter } from "next/font/google";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
+import { Cursor } from "@/components/cursor";
 import "./globals.css";
 
 const anton = Anton({
@@ -94,6 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-sans">
+        <Cursor />
         <Nav />
         <main>{children}</main>
         <Footer />

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
@@ -325,15 +326,84 @@ export default function JoinPage() {
                 Apply to the team <ArrowRight className="w-4 h-4" />
               </a>
             </div>
-            <p className="text-white/30 text-xs mt-8">
-              Questions?{" "}
-              <a href="mailto:kolkata@gobitsnbytes.org" className="underline hover:text-white/55 transition-colors">
+            <div className="mt-6 flex flex-wrap gap-4 items-center">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 border border-white/15 text-white/70 font-semibold text-sm px-6 py-3 rounded-full hover:border-white/35 hover:text-white transition-colors"
+              >
+                Contact us
+              </Link>
+              <a
+                href="mailto:kolkata@gobitsnbytes.org"
+                className="text-white/30 text-xs hover:text-white/55 transition-colors font-mono"
+              >
                 kolkata@gobitsnbytes.org
               </a>
-            </p>
+            </div>
           </motion.div>
         </div>
         <div className="h-px bg-white/12 w-full" />
+      </section>
+
+      {/* Sponsor Us */}
+      <section className="bg-cream-dim">
+        <div className="h-px w-full bg-charcoal/12" />
+        <div className="shell py-20 sm:py-24">
+          <FadeIn>
+            <motion.p
+              variants={fadeUp}
+              className="text-[0.58rem] font-mono font-bold tracking-[0.42em] uppercase text-stone/45 mb-6"
+            >
+              Sponsor Us
+            </motion.p>
+            <motion.h2
+              variants={fadeUp}
+              className="font-display text-charcoal leading-[0.9] mb-6"
+              style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
+            >
+              BACK KOLKATA&apos;S<br />
+              <span className="text-terracotta">BUILDERS.</span>
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-stone text-base leading-relaxed max-w-lg mb-10">
+              We run hackathons, build nights, and workshops for high-agency teen
+              builders across Kolkata. Your brand in front of India&apos;s next
+              generation of engineers and founders.
+            </motion.p>
+
+            <div className="grid sm:grid-cols-3 gap-px bg-charcoal/8 mb-12">
+              {[
+                { stat: "1500+", label: "builders in network" },
+                { stat: "3+",    label: "flagship events per year" },
+                { stat: "Kolkata", label: "city of joy, city of builders" },
+              ].map((item, i) => (
+                <motion.div
+                  key={item.label}
+                  variants={fadeUp}
+                  transition={{ delay: i * 0.08 }}
+                  className="bg-cream-dim px-8 py-7"
+                >
+                  <p className="font-display text-charcoal leading-none mb-2" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>
+                    {item.stat}
+                  </p>
+                  <p className="text-stone/55 text-xs font-mono uppercase tracking-[0.18em]">{item.label}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 items-start">
+              <a
+                href="mailto:kolkata@gobitsnbytes.org?subject=Sponsorship Enquiry"
+                className="inline-flex items-center gap-2 bg-charcoal text-white font-bold text-sm px-8 py-4 rounded-full hover:bg-ink active:scale-[0.98] transition-all duration-200"
+              >
+                Get in touch <ArrowUpRight className="w-4 h-4" />
+              </a>
+              <span className="text-stone/45 text-xs self-center font-mono tracking-[0.12em]">
+                kolkata@gobitsnbytes.org
+              </span>
+            </motion.div>
+          </FadeIn>
+        </div>
+        <div className="h-px w-full bg-charcoal/12" />
       </section>
     </>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
@@ -46,7 +47,7 @@ const CORE_TEAM = [
     name: "Shoryavardhaan Gupta",
     role: "Kolkata Fork Lead",
     dept: "Leadership",
-    image: "https://avatars.githubusercontent.com/u/108920197?v=4",
+    image: "/team/shorya.png",
     bio: "Founded Bits&Bytes Kolkata. Driving the city's identity as a hub for high-agency teen builders.",
   },
   {
@@ -99,12 +100,18 @@ const CONTRIBUTORS = [
     role: "Ops & Creative Contributor",
     initials: "VT",
     color: "#5B9AE8",
+    bg: "rgba(91,154,232,0.07)",
+    border: "rgba(91,154,232,0.18)",
+    bio: "Drives operational and creative initiatives for Bits&Bytes Kolkata — keeping events tight, brand consistent, and the community energy high.",
   },
   {
     name: "Atharva Upadhyay",
     role: "Ops Lead, Kolkata Fork",
     initials: "AU",
     color: "#C5312E",
+    bg: "rgba(197,49,46,0.06)",
+    border: "rgba(197,49,46,0.18)",
+    bio: "Heads on-the-ground operations for the Kolkata fork — coordinating logistics, community workflows, and cross-team execution.",
   },
 ];
 
@@ -256,42 +263,49 @@ export default function AboutPage() {
       </section>
 
       {/* Contributors */}
-      <section className="shell py-16 sm:py-20">
-        <FadeSection>
-          <motion.div variants={fadeUp} className="mb-10">
-            <p className="text-[0.58rem] font-mono font-bold tracking-[0.42em] uppercase text-stone/50 mb-3">
-              Contributors
-            </p>
-            <h2
-              className="font-display text-charcoal leading-[0.9]"
-              style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)" }}
-            >
-              ALSO BUILDING THIS.
-            </h2>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {CONTRIBUTORS.map((c, i) => (
-              <motion.div
-                key={c.name}
-                variants={fadeUp}
-                transition={{ delay: i * 0.07 }}
-                className="flex items-center gap-4 p-4 rounded-xl border border-charcoal/8 bg-white hover:border-charcoal/16 transition-colors duration-200"
+      <section className="py-16 sm:py-24 bg-cream-dim">
+        <div className="shell">
+          <FadeSection>
+            <motion.div variants={fadeUp} className="mb-10">
+              <p className="text-[0.58rem] font-mono font-bold tracking-[0.42em] uppercase text-stone/50 mb-3">
+                Contributors
+              </p>
+              <h2
+                className="font-display text-charcoal leading-[0.9]"
+                style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)" }}
               >
-                <div
-                  className="w-11 h-11 rounded-full flex items-center justify-center shrink-0 text-sm font-bold text-white select-none"
-                  style={{ background: c.color }}
+                ALSO BUILDING THIS.
+              </h2>
+              <p className="text-stone text-sm mt-4 max-w-md leading-relaxed">
+                Key contributors who make the Kolkata chapter what it is.
+              </p>
+            </motion.div>
+
+            <div className="grid sm:grid-cols-2 gap-5 max-w-2xl">
+              {CONTRIBUTORS.map((c, i) => (
+                <motion.div
+                  key={c.name}
+                  variants={fadeUp}
+                  transition={{ delay: i * 0.1 }}
+                  className="group rounded-2xl border p-7 hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)] transition-all duration-300"
+                  style={{ background: c.bg, borderColor: c.border }}
                 >
-                  {c.initials}
-                </div>
-                <div className="min-w-0">
-                  <p className="font-display text-charcoal text-base leading-tight truncate">{c.name}</p>
-                  <p className="text-stone/60 text-[0.65rem] mt-0.5 leading-snug">{c.role}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </FadeSection>
+                  <div
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-xl font-bold text-white select-none mb-5 shadow-sm"
+                    style={{ background: c.color }}
+                  >
+                    {c.initials}
+                  </div>
+                  <p className="font-mono text-[0.52rem] font-bold uppercase tracking-[0.28em] mb-2" style={{ color: c.color }}>
+                    {c.role}
+                  </p>
+                  <h3 className="font-display text-charcoal text-2xl leading-tight mb-3">{c.name}</h3>
+                  <p className="text-stone text-sm leading-relaxed">{c.bio}</p>
+                </motion.div>
+              ))}
+            </div>
+          </FadeSection>
+        </div>
       </section>
 
       {/* Tram divider */}
@@ -324,14 +338,22 @@ export default function AboutPage() {
               We&apos;re always looking for builders, designers, and community leaders
               who want to make something real.
             </p>
-            <a
-              href="https://gusty-servant-a11.notion.site/352d1148777a808ebd28f77a7875a0e6?pvs=105"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-2 bg-terracotta text-white font-bold px-7 py-4 rounded-full hover:bg-[#A02320] transition-colors text-sm"
-            >
-              Apply to join
-            </a>
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 items-start">
+              <a
+                href="https://gusty-servant-a11.notion.site/352d1148777a808ebd28f77a7875a0e6?pvs=105"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-terracotta text-white font-bold px-7 py-4 rounded-full hover:bg-[#A02320] transition-colors text-sm"
+              >
+                Apply to join
+              </a>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 border border-white/18 text-white/70 font-semibold text-sm px-7 py-4 rounded-full hover:border-white/35 hover:text-white transition-colors"
+              >
+                Get in touch
+              </Link>
+            </div>
           </motion.div>
         </div>
         <div className="flex flex-col gap-[4px] w-full">

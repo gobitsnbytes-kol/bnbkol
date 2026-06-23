@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import { motion, useInView, AnimatePresence, animate } from "framer-motion";
+import { motion, useInView, AnimatePresence, animate, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 const JOIN_FORM      = "https://gusty-servant-a11.notion.site/352d1148777a808ebd28f77a7875a0e6?pvs=105";
@@ -94,44 +94,100 @@ const HEADLINE = [
   { text: "BUILDERS.", color: "text-terracotta" },
 ];
 
+const PARTICLES = [
+  { size: 5, top: "18%", left: "58%", color: "rgba(197,49,46,0.28)", anim: "drift-a", dur: "8s",  delay: "0s"   },
+  { size: 3, top: "32%", left: "72%", color: "rgba(91,154,232,0.38)", anim: "drift-b", dur: "11s", delay: "1.8s" },
+  { size: 6, top: "58%", left: "64%", color: "rgba(197,49,46,0.18)", anim: "drift-c", dur: "9s",  delay: "0.6s" },
+  { size: 4, top: "12%", left: "84%", color: "rgba(91,154,232,0.28)", anim: "drift-a", dur: "13s", delay: "2.5s" },
+  { size: 3, top: "72%", left: "79%", color: "rgba(197,49,46,0.22)", anim: "drift-b", dur: "7s",  delay: "4s"   },
+  { size: 5, top: "42%", left: "90%", color: "rgba(91,154,232,0.22)", anim: "drift-c", dur: "10s", delay: "1.2s" },
+];
+
 function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+
+  const bx = useMotionValue(0);
+  const by = useMotionValue(0);
+  const sbx = useSpring(bx, { stiffness: 55, damping: 22 });
+  const sby = useSpring(by, { stiffness: 55, damping: 22 });
+
+  const birdX = useMotionValue(0);
+  const birdY = useMotionValue(0);
+  const sBirdX = useSpring(birdX, { stiffness: 36, damping: 16 });
+  const sBirdY = useSpring(birdY, { stiffness: 36, damping: 16 });
+
+  const onMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = heroRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const cx = (e.clientX - rect.left) / rect.width - 0.5;
+    const cy = (e.clientY - rect.top) / rect.height - 0.5;
+    bx.set(cx * 14);
+    by.set(cy * 8);
+    birdX.set(cx * 26);
+    birdY.set(cy * 16);
+  };
+
   return (
     <section
+      ref={heroRef}
+      onMouseMove={onMouseMove}
       className="relative overflow-hidden min-h-screen flex items-center"
       style={{ background: "radial-gradient(ellipse 65% 75% at 92% 88%, rgba(234,122,40,0.72) 0%, transparent 62%), radial-gradient(ellipse 48% 52% at 88% 8%, rgba(91,154,232,0.52) 0%, transparent 54%), linear-gradient(165deg, #FAF7EF 0%, #F2E4C8 42%, #D9BA84 100%)" }}
     >
-      {/* Bridge — back layer */}
-      <div
+      {/* Floating particles */}
+      <div className="absolute inset-0 pointer-events-none" style={{ animation: "hero-fade 2s 0.5s both" }}>
+        {PARTICLES.map((p, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              width: p.size,
+              height: p.size,
+              top: p.top,
+              left: p.left,
+              background: p.color,
+              animation: `${p.anim} ${p.dur} ease-in-out ${p.delay} infinite`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Bridge — parallax outer, entrance inner */}
+      <motion.div
         className="absolute bottom-0 right-0 w-full lg:w-[72%] pointer-events-none select-none"
-        style={{ animation: "hero-slide-in 1.1s cubic-bezier(0.22,1,0.36,1) 0.2s both" }}
+        style={{ x: sbx, y: sby }}
       >
-        <Image
-          src="/hero/howrah-bridge.png"
-          alt=""
-          width={1200}
-          height={500}
-          className="w-full h-auto object-contain object-bottom"
-          style={{ mixBlendMode: "multiply", opacity: 0.88 }}
-          priority
-        />
-      </div>
+        <div style={{ animation: "hero-slide-in 1.1s cubic-bezier(0.22,1,0.36,1) 0.2s both" }}>
+          <Image
+            src="/hero/howrah-bridge.png"
+            alt=""
+            width={1200}
+            height={500}
+            className="w-full h-auto object-contain object-bottom"
+            style={{ mixBlendMode: "multiply", opacity: 0.88 }}
+            priority
+          />
+        </div>
+      </motion.div>
 
-      {/* Birds — mid layer, CSS float */}
-      <div
-        className="absolute top-[8%] right-[8%] w-[22%] max-w-[260px] pointer-events-none select-none animate-float"
-        style={{ opacity: 0.55 }}
+      {/* Birds — more parallax, float inner */}
+      <motion.div
+        className="absolute top-[8%] right-[8%] w-[22%] max-w-[260px] pointer-events-none select-none"
+        style={{ x: sBirdX, y: sBirdY, opacity: 0.55 }}
       >
-        <Image
-          src="/hero/birds.png"
-          alt=""
-          width={400}
-          height={300}
-          className="w-full h-auto"
-          style={{ mixBlendMode: "multiply" }}
-        />
-      </div>
+        <div className="animate-float">
+          <Image
+            src="/hero/birds.png"
+            alt=""
+            width={400}
+            height={300}
+            className="w-full h-auto"
+            style={{ mixBlendMode: "multiply" }}
+          />
+        </div>
+      </motion.div>
 
-      {/* Tram — foreground, CSS slide */}
+      {/* Tram — foreground, CSS slide (unchanged) */}
       <div
         className="absolute pointer-events-none select-none animate-tram"
         style={{ bottom: "4%", width: "clamp(220px, 22vw, 360px)" }}
@@ -414,7 +470,41 @@ function Impact() {
   );
 }
 
-// ─── Partners — magazine block grid ──────────────────────────────────────────
+// ─── Partners — sponsor placeholder grid ──────────────────────────────────────
+
+const SPONSOR_SLOTS = [
+  { type: "Title Sponsor",     bg: "bg-charcoal", text: "text-white",    sub: "text-white/30",  span: true,  phrases: ["Your brand here.", "Back the builders.", "Be the leading face.", "Shape what's next."] },
+  { type: "Knowledge Partner", bg: "bg-cream-dim", text: "text-charcoal", sub: "text-stone/45",  span: false, phrases: ["Reach teen founders.", "Put your logo here.", "Kolkata's next wave.", "Invest in builders."] },
+  { type: "Community Partner", bg: "bg-tram/10",   text: "text-charcoal", sub: "text-tram/55",   span: false, phrases: ["Be part of this.", "Every event. Your name.", "High-agency audience.", "Partner with us."] },
+];
+
+function SpinningSlot({ phrases, textClass, subClass }: { phrases: string[]; textClass: string; subClass: string }) {
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % phrases.length), 2600);
+    return () => clearInterval(t);
+  }, [phrases.length]);
+  return (
+    <div className="overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.h3
+          key={idx}
+          className={`font-display ${textClass} leading-tight`}
+          style={{ fontSize: "clamp(1.6rem, 2.8vw, 2.2rem)" }}
+          initial={{ opacity: 0, y: "60%" }}
+          animate={{ opacity: 1, y: "0%" }}
+          exit={{ opacity: 0, y: "-60%" }}
+          transition={{ duration: 0.38, ease: EASE }}
+        >
+          {phrases[idx]}
+        </motion.h3>
+      </AnimatePresence>
+      <p className={`${subClass} text-[0.52rem] font-mono tracking-[0.18em] uppercase mt-5`}>
+        Slot open — kolkata@gobitsnbytes.org
+      </p>
+    </div>
+  );
+}
 
 function Partners() {
   const ref = useRef(null);
@@ -422,7 +512,6 @@ function Partners() {
 
   return (
     <section ref={ref} className="bg-ink">
-      {/* Section header */}
       <div className="shell pt-20 sm:pt-28 pb-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -442,7 +531,6 @@ function Partners() {
         </motion.div>
       </div>
 
-      {/* Magazine block grid — 3px ink gap acts as tram-track divider */}
       <motion.div
         initial={{ opacity: 0, y: 32 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -450,101 +538,17 @@ function Partners() {
         transition={{ duration: 0.7, ease: EASE }}
         className="grid sm:grid-cols-2 gap-[3px] bg-ink"
       >
-        {/* osmAPI — left column, spans both rows */}
-        <a
-          href="https://www.osmapi.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group sm:row-span-2 bg-charcoal p-10 sm:p-12 lg:p-16 flex flex-col justify-between min-h-[280px]"
-        >
-          <div>
-            <p className="text-[0.55rem] font-mono font-bold uppercase tracking-[0.3em] text-tram mb-8">
-              API Partner
+        {SPONSOR_SLOTS.map((s) => (
+          <div
+            key={s.type}
+            className={`${s.bg} ${s.span ? "sm:row-span-2" : ""} p-10 sm:p-12 lg:p-16 flex flex-col justify-between min-h-[220px]`}
+          >
+            <p className={`text-[0.52rem] font-mono font-bold uppercase tracking-[0.3em] ${s.sub} mb-10`}>
+              {s.type}
             </p>
-            <div className="relative h-5 w-32 mb-6">
-              <Image
-                src="/partners/OSM-API-Light-BBO_4Eff.png"
-                alt="osmAPI"
-                fill
-                className="object-contain object-left brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity duration-300"
-                sizes="128px"
-              />
-            </div>
-            <h3
-              className="font-display text-white leading-tight"
-              style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)" }}
-            >
-              osmAPI
-            </h3>
+            <SpinningSlot phrases={s.phrases} textClass={s.text} subClass={s.sub} />
           </div>
-          <p className="text-white/30 text-sm leading-relaxed mt-10 max-w-xs group-hover:text-white/55 transition-colors duration-300">
-            One Awesome API for everything AI — route to OpenAI, Anthropic, Google &amp; 14+ LLM providers.
-          </p>
-        </a>
-
-        {/* YRI — top-right, cream block */}
-        <a
-          href="https://www.yriscience.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group bg-cream p-10 sm:p-12 flex flex-col justify-between min-h-[220px]"
-        >
-          <div>
-            <p className="text-[0.55rem] font-mono font-bold uppercase tracking-[0.3em] text-stone/55 mb-6">
-              Knowledge Partner
-            </p>
-            <div className="relative h-5 w-24 mb-4">
-              <Image
-                src="/partners/yri.png"
-                alt="YRI Fellowship"
-                fill
-                className="object-contain object-left grayscale group-hover:grayscale-0 transition-all duration-300"
-                sizes="96px"
-              />
-            </div>
-            <h3
-              className="font-display text-charcoal"
-              style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)" }}
-            >
-              YRI Fellowship
-            </h3>
-          </div>
-          <p className="text-stone/55 text-sm leading-relaxed mt-6">
-            Advancing scientific research and building the next generation of innovators.
-          </p>
-        </a>
-
-        {/* z.ai — bottom-right, tram blue block */}
-        <a
-          href="https://chat.z.ai/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group bg-tram p-10 sm:p-12 flex flex-col justify-between min-h-[220px]"
-        >
-          <div>
-            <p className="text-[0.55rem] font-mono font-bold uppercase tracking-[0.3em] text-white/55 mb-6">
-              AI Partner
-            </p>
-            <div className="relative h-5 w-16 mb-4">
-              <Image
-                src="/partners/zai.svg"
-                alt="z.ai"
-                fill
-                className="object-contain object-left brightness-0 invert opacity-90"
-                sizes="64px"
-              />
-            </div>
-            <h3
-              className="font-display text-white"
-              style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)" }}
-            >
-              z.ai
-            </h3>
-          </div>
-          <p className="text-white/55 text-sm leading-relaxed mt-6 group-hover:text-white/80 transition-colors duration-300">
-            Intelligent chat experiences and frontier language model integrations.
-          </p>
-        </a>
+        ))}
       </motion.div>
 
       <div className="h-20 sm:h-28" />
@@ -679,10 +683,93 @@ function JoinCTA() {
             >
               Join community <ArrowUpRight className="w-4 h-4" />
             </a>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 border border-white/10 text-white/55 font-semibold text-sm px-9 py-5 rounded-full hover:border-white/25 hover:text-white/80 transition-colors"
+            >
+              Contact us
+            </Link>
           </motion.div>
         </motion.div>
       </div>
       <TramLines color="white" />
+    </section>
+  );
+}
+
+// ─── Sponsor CTA ─────────────────────────────────────────────────────────────
+
+const SPONSOR_PERKS = [
+  { num: "01", title: "Event presence",    body: "Logo on banners, stage backdrops, and all printed materials at every hackathon and build night." },
+  { num: "02", title: "Digital reach",     body: "Brand mentions across our socials, Discord announcements, and event recap posts — 1500+ active builders." },
+  { num: "03", title: "Talent pipeline",   body: "First access to our top builders. Ideal for early recruiting, internships, or product beta testers." },
+  { num: "04", title: "Named sponsorship", body: "Title and knowledge partner slots available for flagship events, with co-branding on all event collateral." },
+];
+
+function SponsorCTA() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.15 });
+
+  return (
+    <section ref={ref} className="bg-cream-dim overflow-hidden">
+      <TramLines color="charcoal" />
+      <div className="shell py-20 sm:py-28">
+        <motion.div initial="hidden" animate={inView ? "show" : "hidden"} variants={stagger}>
+          <motion.p
+            variants={fadeUp}
+            className="text-[0.58rem] font-mono font-bold tracking-[0.42em] uppercase text-stone/45 mb-6"
+          >
+            Sponsor Us
+          </motion.p>
+
+          <motion.h2
+            variants={fadeUp}
+            className="font-display text-charcoal leading-[0.9] mb-6"
+            style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
+          >
+            BACK KOLKATA&apos;S<br />
+            <span className="text-terracotta">BUILDERS.</span>
+          </motion.h2>
+
+          <motion.p variants={fadeUp} className="text-stone text-base leading-relaxed max-w-xl mb-14">
+            We run hackathons, build nights, and workshops for high-agency teen
+            builders across Kolkata. Your brand directly in front of India&apos;s
+            next generation of engineers, designers, and founders.
+          </motion.p>
+
+          <div className="grid sm:grid-cols-2 gap-px bg-charcoal/8 mb-14">
+            {SPONSOR_PERKS.map((p, i) => (
+              <motion.div
+                key={p.num}
+                variants={fadeUp}
+                transition={{ delay: i * 0.07 }}
+                className="bg-cream-dim px-8 py-8 group"
+              >
+                <p className="font-mono text-[0.52rem] font-bold text-tram/55 tracking-[0.28em] uppercase mb-3">
+                  {p.num}
+                </p>
+                <h3 className="font-display text-charcoal text-xl leading-tight mb-2 group-hover:text-terracotta transition-colors duration-200">
+                  {p.title}
+                </h3>
+                <p className="text-stone/70 text-sm leading-relaxed">{p.body}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 items-start">
+            <a
+              href="mailto:kolkata@gobitsnbytes.org?subject=Sponsorship Enquiry"
+              className="inline-flex items-center gap-2 bg-charcoal text-white font-bold text-sm px-8 py-4 rounded-full hover:bg-ink active:scale-[0.98] transition-all duration-200"
+            >
+              Get in touch <ArrowUpRight className="w-4 h-4" />
+            </a>
+            <span className="text-stone/40 text-xs self-center font-mono tracking-[0.12em]">
+              kolkata@gobitsnbytes.org
+            </span>
+          </motion.div>
+        </motion.div>
+      </div>
+      <TramLines color="charcoal" />
     </section>
   );
 }
@@ -700,6 +787,7 @@ export default function HomePage() {
       <Partners />
       <Voices />
       <JoinCTA />
+      <SponsorCTA />
     </>
   );
 }

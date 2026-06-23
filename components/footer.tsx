@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 
 const NAV = [
@@ -32,9 +33,21 @@ export function Footer() {
             Bits<span className="text-terracotta">&</span>Bytes<br />
             <span className="text-white/38">Kolkata.</span>
           </p>
-          <p className="text-stone/40 text-[0.58rem] font-mono uppercase tracking-[0.32em] sm:text-right sm:pb-2 leading-relaxed">
-            City of Joy.<br />City of Builders.
-          </p>
+          <div className="flex flex-col items-start sm:items-end gap-3 sm:pb-2">
+            <div className="relative w-[clamp(120px,18vw,220px)] opacity-[0.22] select-none pointer-events-none">
+              <Image
+                src="/taxi.png"
+                alt="Kolkata yellow taxi"
+                width={440}
+                height={200}
+                className="w-full h-auto"
+                style={{ mixBlendMode: "screen" }}
+              />
+            </div>
+            <p className="text-stone/40 text-[0.58rem] font-mono uppercase tracking-[0.32em] sm:text-right leading-relaxed">
+              City of Joy.<br />City of Builders.
+            </p>
+          </div>
         </div>
       </div>
 

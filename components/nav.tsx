@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { href: "/about", label: "About" },
   { href: "/events", label: "Events" },
   { href: "/join", label: "Join" },
+  { href: "/coc", label: "CoC" },
 ];
 
 const JOIN_URL = "https://gusty-servant-a11.notion.site/357d1148777a8007af72ee9b4a54546a?pvs=105";
