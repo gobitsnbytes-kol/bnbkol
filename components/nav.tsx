@@ -48,9 +48,6 @@ export function Nav() {
           <div className="w-7 h-7 rounded-md overflow-hidden bg-white flex items-center justify-center border border-charcoal/10">
             <Image src="/logo-kolkata.png" alt="" width={22} height={22} className="object-contain" />
           </div>
-          <span className="hidden sm:block font-mono text-[0.62rem] font-bold tracking-[0.18em] uppercase text-charcoal/60">
-            Bits&Bytes Kolkata
-          </span>
         </Link>
 
         {/* Desktop links */}

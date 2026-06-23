@@ -2,52 +2,53 @@ import Link from "next/link";
 import { Github, Linkedin, Instagram, Mail } from "lucide-react";
 
 const NAV = [
-  { href: "/about", label: "About" },
-  { href: "/events", label: "Events" },
-  { href: "/join", label: "Join" },
-  { href: "/coc", label: "Code of Conduct" },
-  { href: "/contact", label: "Contact" },
+  { href: "/about",   label: "About"           },
+  { href: "/events",  label: "Events"          },
+  { href: "/join",    label: "Join"            },
+  { href: "/coc",     label: "Code of Conduct" },
+  { href: "/contact", label: "Contact"         },
 ];
 
 const SOCIALS = [
-  { href: "https://github.com/gobitsnbytes-kol", label: "GitHub", icon: Github },
-  { href: "https://www.linkedin.com/company/gobitsbytes", label: "LinkedIn", icon: Linkedin },
+  { href: "https://github.com/gobitsnbytes-kol",            label: "GitHub",    icon: Github    },
+  { href: "https://www.linkedin.com/company/gobitsbytes",   label: "LinkedIn",  icon: Linkedin  },
   { href: "https://www.instagram.com/gobitsnbytes.kolkata", label: "Instagram", icon: Instagram },
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-charcoal text-white/70">
-      {/* Tram lines */}
-      <div className="h-px bg-terracotta/50 w-full" />
-      <div className="h-px bg-terracotta/25 w-full mt-[5px]" />
+    <footer className="bg-ink text-white/70">
+      {/* Tram rails */}
+      <div className="h-[2.5px] bg-terracotta/65 w-full" />
+      <div className="h-px bg-terracotta/22 w-full mt-[5px]" />
 
-      <div className="shell py-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
-        {/* Brand */}
-        <div className="space-y-4">
-          <p className="font-display text-white leading-none" style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)" }}>
+      {/* Big brand name */}
+      <div className="shell pt-14 pb-10 border-b border-white/6">
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <p
+            className="font-display text-white leading-[0.85]"
+            style={{ fontSize: "clamp(3rem, 10vw, 8.5rem)" }}
+          >
             Bits<span className="text-terracotta">&</span>Bytes<br />
-            <span className="text-white/50">Kolkata</span>
+            <span className="text-white/38">Kolkata.</span>
           </p>
-          <p className="text-stone text-sm leading-relaxed max-w-xs">
-            Kolkata&apos;s boldest teen-led builders club. We run hackathons, workshops,
-            and build sessions — entirely student driven.
-          </p>
-          <p className="text-stone/60 text-xs font-mono uppercase tracking-[0.2em]">
-            City of Joy. City of Builders.
+          <p className="text-stone/40 text-[0.58rem] font-mono uppercase tracking-[0.32em] sm:text-right sm:pb-2 leading-relaxed">
+            City of Joy.<br />City of Builders.
           </p>
         </div>
+      </div>
 
-        {/* Links */}
+      {/* Links + contact */}
+      <div className="shell py-10 grid grid-cols-2 sm:grid-cols-3 gap-10">
         <nav className="space-y-3" aria-label="Footer navigation">
-          <p className="text-[0.65rem] font-mono font-bold uppercase tracking-[0.3em] text-stone/60 mb-4">
+          <p className="text-[0.55rem] font-mono font-bold uppercase tracking-[0.38em] text-stone/38 mb-5">
             Navigate
           </p>
           {NAV.map((link) => (
             <div key={link.href}>
               <Link
                 href={link.href}
-                className="text-sm text-white/60 hover:text-white transition-colors duration-200"
+                className="text-sm text-white/48 hover:text-white transition-colors duration-200"
               >
                 {link.label}
               </Link>
@@ -55,20 +56,18 @@ export function Footer() {
           ))}
         </nav>
 
-        {/* Contact */}
-        <div className="space-y-4">
-          <p className="text-[0.65rem] font-mono font-bold uppercase tracking-[0.3em] text-stone/60">
+        <div className="space-y-3">
+          <p className="text-[0.55rem] font-mono font-bold uppercase tracking-[0.38em] text-stone/38 mb-5">
             Get in touch
           </p>
           <a
             href="mailto:kolkata@gobitsnbytes.org"
-            className="flex items-center gap-2 text-white/80 hover:text-white text-sm transition-colors duration-200 group"
+            className="flex items-center gap-2 text-white/60 hover:text-white text-sm transition-colors duration-200"
           >
-            <Mail className="w-4 h-4 text-terracotta shrink-0" />
+            <Mail className="w-3.5 h-3.5 text-terracotta shrink-0" />
             kolkata@gobitsnbytes.org
           </a>
-
-          <div className="flex items-center gap-3 pt-2">
+          <div className="flex items-center gap-2 pt-2">
             {SOCIALS.map(({ href, label, icon: Icon }) => (
               <a
                 key={href}
@@ -76,30 +75,36 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="w-9 h-9 rounded-full bg-white/6 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/12 hover:border-white/20 transition-all duration-200"
+                className="w-8 h-8 rounded-md bg-white/5 border border-white/8 flex items-center justify-center text-white/38 hover:text-white hover:bg-white/10 transition-all duration-200"
               >
-                <Icon className="w-4 h-4" />
+                <Icon className="w-3.5 h-3.5" />
               </a>
             ))}
           </div>
         </div>
+
+        <div className="col-span-2 sm:col-span-1 sm:flex sm:flex-col sm:justify-end sm:items-end">
+          <p className="text-[0.52rem] font-mono uppercase tracking-[0.2em] text-stone/22 leading-relaxed">
+            A fork of the<br />Bits&amp;Bytes organization
+          </p>
+        </div>
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/6">
+      <div className="border-t border-white/5">
         <div className="shell py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-stone/50 font-mono">
+          <p className="text-xs text-stone/32 font-mono">
             © 2026 Bits&Bytes Kolkata · gobitsnbytes.org
           </p>
-          <div className="flex items-center gap-4">
-            <Link href="/coc" className="text-xs text-stone/40 hover:text-stone/70 transition-colors">
+          <div className="flex items-center gap-5">
+            <Link href="/coc" className="text-xs text-stone/28 hover:text-stone/60 transition-colors">
               Code of Conduct
             </Link>
             <a
               href="https://github.com/gobitsnbytes-kol"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-stone/40 hover:text-stone/70 transition-colors"
+              className="text-xs text-stone/28 hover:text-stone/60 transition-colors"
             >
               GitHub
             </a>

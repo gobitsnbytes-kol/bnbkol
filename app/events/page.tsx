@@ -238,25 +238,24 @@ export default function EventsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-cream dot-grid overflow-hidden pt-32 pb-20">
+      <section className="relative bg-cream overflow-hidden pt-32 pb-20">
         <div className="shell">
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           >
-            <span className="eyebrow">
-              <span className="w-1.5 h-1.5 rounded-full bg-terracotta animate-pulse" />
+            <p className="text-[0.58rem] font-mono font-bold tracking-[0.42em] uppercase text-stone/50 mb-5">
               Events
-            </span>
+            </p>
             <h1
-              className="font-display text-charcoal mt-6 leading-[0.92] tracking-[-0.02em]"
-              style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}
+              className="font-display text-charcoal leading-[0.88] tracking-[-0.02em]"
+              style={{ fontSize: "clamp(4rem, 9vw, 7.5rem)" }}
             >
               WHERE CODE MEETS<br />
               <span className="text-terracotta">EVERY BOUNDARY.</span>
             </h1>
-            <p className="text-stone text-xl mt-6 max-w-2xl leading-relaxed">
+            <p className="text-stone text-xl mt-7 max-w-2xl leading-relaxed">
               Hackathons, summits, workshops, and build nights — the events that shaped
               Kolkata&apos;s next generation of builders.
             </p>
@@ -282,10 +281,10 @@ export default function EventsPage() {
               onClick={() => setFilter(type)}
               role="tab"
               aria-selected={filter === type}
-              className={`text-xs font-mono font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full border transition-all duration-200 ${
+              className={`text-[0.7rem] font-mono font-bold uppercase tracking-[0.2em] px-1 py-2 border-b-2 transition-all duration-200 ${
                 filter === type
-                  ? "bg-terracotta text-white border-terracotta"
-                  : "border-charcoal/12 text-stone hover:border-charcoal/25 hover:text-charcoal"
+                  ? "text-charcoal border-terracotta"
+                  : "border-transparent text-stone hover:text-charcoal hover:border-charcoal/20"
               }`}
             >
               {type}

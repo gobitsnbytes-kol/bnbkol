@@ -7,7 +7,7 @@
   --color-cream-dim: #F0E8D5;
   --color-terracotta: #C5312E;
   --color-terracotta-deep: #A02320;
-  --color-tram: #1A4B8C;
+  --color-tram: #5B9AE8;
   --color-charcoal: #2C2926;
   --color-stone: #5C554F;   /* darkened from #8A8178 — passes WCAG AA 4.5:1 on cream */
   --color-ink: #1A1614;
@@ -94,14 +94,12 @@
     background-size: 20px 20px;
   }
 
-  /* ── Hero background with layered warmth ───────────────────────── */
+  /* ── Hero background with layered warmth (no dot-grid) ─────────── */
   .hero-bg {
     background-color: #FAF7EF;
     background-image:
       radial-gradient(ellipse at 5% 95%, rgba(197, 49, 46, 0.09) 0%, transparent 55%),
-      radial-gradient(ellipse at 95% 5%, rgba(26, 75, 140, 0.05) 0%, transparent 45%),
-      radial-gradient(circle, rgba(44, 41, 38, 0.055) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 20px 20px;
+      radial-gradient(ellipse at 95% 5%, rgba(26, 75, 140, 0.05) 0%, transparent 45%);
   }
 
   /* ── Subtle cream-dim with dot grid ───────────────────────────── */
@@ -111,6 +109,39 @@
     background-size: 20px 20px;
   }
 }
+
+/* ── Hero entrance animations ────────────────────────────────────── */
+@keyframes hero-rise {
+  from { transform: translateY(108%); }
+  to   { transform: translateY(0); }
+}
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(var(--from-y, 14px)); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes hero-slide-in {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Bird float ─────────────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+.animate-float { animation: float 5s ease-in-out infinite; }
+
+/* ── Tram slide ──────────────────────────────────────────────────── */
+@keyframes tram-slide {
+  0%      { transform: translateX(-5vw); }
+  82%     { transform: translateX(110vw); }
+  82.01%, 100% { transform: translateX(-5vw); }
+}
+.animate-tram { animation: tram-slide 22s linear infinite; }
 
 /* ── Marquee ticker ─────────────────────────────────────────────── */
 @keyframes marquee {
@@ -130,3 +161,11 @@
   to   { transform: translateX(-50%); }
 }
 .animate-scroll-x { animation: scroll-x 30s linear infinite; }
+
+/* ── Reduced motion ──────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

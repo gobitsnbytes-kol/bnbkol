@@ -4,15 +4,13 @@ import Image from "next/image";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
+const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
+
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE } },
 };
-
-const stagger = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
-};
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
 
 function FadeSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const ref = useRef(null);
@@ -95,36 +93,50 @@ const CORE_TEAM = [
   },
 ];
 
+const CONTRIBUTORS = [
+  {
+    name: "Vaibhav Thakkar",
+    role: "Ops & Creative Contributor",
+    initials: "VT",
+    color: "#5B9AE8",
+  },
+  {
+    name: "Atharva Upadhyay",
+    role: "Ops Lead, Kolkata Fork",
+    initials: "AU",
+    color: "#C5312E",
+  },
+];
+
 const DEPT_COLOR: Record<string, string> = {
-  Leadership: "bg-tram/10 text-tram",
-  Engineering: "bg-terracotta/10 text-terracotta",
-  Design: "bg-stone/15 text-stone",
-  Operations: "bg-charcoal/8 text-charcoal/60",
+  Leadership: "text-tram",
+  Engineering: "text-terracotta",
+  Design: "text-stone",
+  Operations: "text-charcoal/50",
 };
 
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-cream dot-grid overflow-hidden pt-32 pb-20">
+      {/* Hero — clean cream, no dot-grid */}
+      <section className="relative bg-cream overflow-hidden pt-32 pb-20">
         <div className="shell">
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+            transition={{ duration: 0.7, ease: EASE }}
           >
-            <span className="eyebrow">
-              <span className="w-1.5 h-1.5 rounded-full bg-terracotta" />
+            <p className="text-[0.58rem] font-mono font-bold tracking-[0.42em] uppercase text-stone/50 mb-5">
               About Us
-            </span>
+            </p>
             <h1
-              className="font-display text-charcoal mt-6 leading-[0.92] tracking-[-0.02em]"
-              style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}
+              className="font-display text-charcoal leading-[0.88] tracking-[-0.02em]"
+              style={{ fontSize: "clamp(4rem, 9vw, 7.5rem)" }}
             >
               WHO WE<br />
               <span className="text-terracotta">ARE.</span>
             </h1>
-            <p className="text-stone text-xl mt-6 max-w-2xl leading-relaxed">
+            <p className="text-stone text-xl mt-7 max-w-xl leading-relaxed">
               A teen-led code club dedicated to empowering high-agency individuals to
               ship production-grade technology through real-world product launches.
             </p>
@@ -133,68 +145,93 @@ export default function AboutPage() {
       </section>
 
       {/* Tram divider */}
-      <div className="tram" />
+      <div className="flex flex-col gap-[4px] w-full">
+        <div className="h-px w-full bg-charcoal/20" />
+        <div className="h-px w-full bg-charcoal/10" />
+      </div>
 
-      {/* Origin story */}
-      <section className="shell py-24 sm:py-32">
-        <FadeSection>
-          <motion.div variants={fadeUp} className="mb-12">
-            <span className="eyebrow">
-              <span className="w-1.5 h-1.5 rounded-full bg-terracotta" />
-              The Story
-            </span>
-            <h2
-              className="font-display text-charcoal mt-5 leading-[0.93] tracking-[-0.02em]"
-              style={{ fontSize: "clamp(2.25rem, 4vw, 3rem)" }}
-            >
-              Built from the ground up
-            </h2>
-          </motion.div>
+      {/* Story — 2×2 card grid */}
+      <section className="py-24 sm:py-32">
+        <div className="shell mb-14">
+          <FadeSection>
+            <motion.div variants={fadeUp}>
+              <p className="text-[0.58rem] font-mono font-bold tracking-[0.42em] uppercase text-stone/50 mb-4">
+                The Story
+              </p>
+              <h2
+                className="font-display text-charcoal leading-[0.9]"
+                style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)" }}
+              >
+                BUILT FROM<br />THE GROUND UP.
+              </h2>
+            </motion.div>
+          </FadeSection>
+        </div>
 
-          <div className="grid sm:grid-cols-2 gap-5">
-            {STORY.map((s, i) => (
+        <FadeSection className="grid sm:grid-cols-2 gap-px bg-charcoal/10">
+          {STORY.map((s, i) => {
+            const bg = i % 2 === 0 ? "bg-cream" : "bg-[#F5EFE2]";
+            return (
               <motion.div
                 key={s.title}
                 variants={fadeUp}
                 transition={{ delay: i * 0.08 }}
-                className="rounded-[var(--radius-card)] border border-charcoal/8 bg-white p-7"
+                className={`relative overflow-hidden p-10 sm:p-14 ${bg}`}
               >
-                <h3 className="font-display text-xl text-charcoal leading-tight mb-3">{s.title}</h3>
-                <p className="text-stone text-sm leading-relaxed">{s.body}</p>
+                <span
+                  className="absolute right-5 top-3 font-display leading-none text-charcoal/5 select-none pointer-events-none"
+                  style={{ fontSize: "clamp(6rem, 14vw, 11rem)" }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div className="relative">
+                  <p className="font-mono text-[0.52rem] font-bold uppercase tracking-[0.32em] text-tram mb-5">
+                    Chapter {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <h3
+                    className="font-display text-charcoal leading-tight mb-5"
+                    style={{ fontSize: "clamp(1.5rem, 2.8vw, 2rem)" }}
+                  >
+                    {s.title}
+                  </h3>
+                  <p className="text-stone text-sm leading-relaxed max-w-md">{s.body}</p>
+                </div>
               </motion.div>
-            ))}
-          </div>
+            );
+          })}
         </FadeSection>
       </section>
 
       {/* Tram divider */}
-      <div className="tram" />
+      <div className="flex flex-col gap-[4px] w-full">
+        <div className="h-px w-full bg-charcoal/20" />
+        <div className="h-px w-full bg-charcoal/10" />
+      </div>
 
-      {/* Core team */}
+      {/* Team */}
       <section className="shell py-24 sm:py-32">
         <FadeSection>
-          <motion.div variants={fadeUp} className="mb-12">
-            <span className="eyebrow">
-              <span className="w-1.5 h-1.5 rounded-full bg-terracotta" />
+          <motion.div variants={fadeUp} className="mb-14">
+            <p className="text-[0.58rem] font-mono font-bold tracking-[0.42em] uppercase text-stone/50 mb-4">
               The Team
-            </span>
+            </p>
             <h2
-              className="font-display text-charcoal mt-5 leading-[0.93] tracking-[-0.02em]"
-              style={{ fontSize: "clamp(2.25rem, 4vw, 3rem)" }}
+              className="font-display text-charcoal leading-[0.9]"
+              style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)" }}
             >
-              The people building this
+              THE PEOPLE<br />BUILDING THIS.
             </h2>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {/* All team members — equal grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {CORE_TEAM.map((member, i) => (
               <motion.div
                 key={member.name}
                 variants={fadeUp}
                 transition={{ delay: i * 0.07 }}
-                className="group rounded-[var(--radius-card)] border border-charcoal/8 bg-white overflow-hidden hover:border-terracotta/25 hover:shadow-[0_8px_40px_rgba(197,49,46,0.07)] transition-all duration-300"
+                className="group rounded-2xl border border-charcoal/8 bg-white overflow-hidden hover:border-terracotta/22 hover:shadow-[0_8px_40px_rgba(197,49,46,0.07)] transition-all duration-300"
               >
-                {/* Photo */}
                 <div className="relative aspect-square bg-cream-dim overflow-hidden">
                   <Image
                     src={member.image}
@@ -204,19 +241,13 @@ export default function AboutPage() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
-
-                {/* Info */}
                 <div className="p-5">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <h3 className="font-display text-xl text-charcoal leading-tight">{member.name}</h3>
-                      <p className="text-stone text-xs mt-1 leading-snug">{member.role}</p>
-                    </div>
-                    <span className={`shrink-0 text-[0.58rem] font-mono font-bold uppercase tracking-[0.2em] px-2.5 py-1 rounded-full ${DEPT_COLOR[member.dept]}`}>
-                      {member.dept}
-                    </span>
-                  </div>
-                  <p className="text-stone/70 text-xs mt-3 leading-relaxed">{member.bio}</p>
+                  <p className={`text-[0.52rem] font-mono font-bold uppercase tracking-[0.28em] mb-1.5 ${DEPT_COLOR[member.dept]}`}>
+                    {member.dept}
+                  </p>
+                  <h3 className="font-display text-xl text-charcoal leading-tight">{member.name}</h3>
+                  <p className="text-stone text-xs mt-1 leading-snug">{member.role}</p>
+                  <p className="text-stone/60 text-xs mt-3 leading-relaxed">{member.bio}</p>
                 </div>
               </motion.div>
             ))}
@@ -224,33 +255,89 @@ export default function AboutPage() {
         </FadeSection>
       </section>
 
-      {/* Dark band */}
+      {/* Contributors */}
+      <section className="shell py-16 sm:py-20">
+        <FadeSection>
+          <motion.div variants={fadeUp} className="mb-10">
+            <p className="text-[0.58rem] font-mono font-bold tracking-[0.42em] uppercase text-stone/50 mb-3">
+              Contributors
+            </p>
+            <h2
+              className="font-display text-charcoal leading-[0.9]"
+              style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)" }}
+            >
+              ALSO BUILDING THIS.
+            </h2>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {CONTRIBUTORS.map((c, i) => (
+              <motion.div
+                key={c.name}
+                variants={fadeUp}
+                transition={{ delay: i * 0.07 }}
+                className="flex items-center gap-4 p-4 rounded-xl border border-charcoal/8 bg-white hover:border-charcoal/16 transition-colors duration-200"
+              >
+                <div
+                  className="w-11 h-11 rounded-full flex items-center justify-center shrink-0 text-sm font-bold text-white select-none"
+                  style={{ background: c.color }}
+                >
+                  {c.initials}
+                </div>
+                <div className="min-w-0">
+                  <p className="font-display text-charcoal text-base leading-tight truncate">{c.name}</p>
+                  <p className="text-stone/60 text-[0.65rem] mt-0.5 leading-snug">{c.role}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </FadeSection>
+      </section>
+
+      {/* Tram divider */}
+      <div className="flex flex-col gap-[4px] w-full">
+        <div className="h-px w-full bg-charcoal/20" />
+        <div className="h-px w-full bg-charcoal/10" />
+      </div>
+
+      {/* Dark CTA band */}
       <section className="bg-charcoal w-full">
-        <div className="tram" />
-        <div className="shell py-20 text-center">
+        <div className="flex flex-col gap-[4px] w-full">
+          <div className="h-px w-full bg-white/18" />
+          <div className="h-px w-full bg-white/8" />
+        </div>
+        <div className="shell py-20">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+            transition={{ duration: 0.7, ease: EASE }}
           >
-            <p className="font-display text-white/90 leading-[0.92]" style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)" }}>
-              Want to be part of this?
+            <p
+              className="font-display text-white leading-[0.9]"
+              style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
+            >
+              Want to be part<br />
+              <span className="text-terracotta">of this?</span>
             </p>
-            <p className="text-stone mt-4 max-w-md mx-auto">
-              We&apos;re always looking for builders, designers, and community leaders who want to make something real.
+            <p className="text-stone/70 mt-5 max-w-sm text-sm leading-relaxed">
+              We&apos;re always looking for builders, designers, and community leaders
+              who want to make something real.
             </p>
             <a
               href="https://gusty-servant-a11.notion.site/352d1148777a808ebd28f77a7875a0e6?pvs=105"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-2 bg-terracotta text-white font-bold px-7 py-4 rounded-full hover:bg-terracotta-deep transition-colors text-sm"
+              className="mt-8 inline-flex items-center gap-2 bg-terracotta text-white font-bold px-7 py-4 rounded-full hover:bg-[#A02320] transition-colors text-sm"
             >
               Apply to join
             </a>
           </motion.div>
         </div>
-        <div className="tram" />
+        <div className="flex flex-col gap-[4px] w-full">
+          <div className="h-px w-full bg-white/18" />
+          <div className="h-px w-full bg-white/8" />
+        </div>
       </section>
     </>
   );
