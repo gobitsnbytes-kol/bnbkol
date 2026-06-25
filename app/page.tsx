@@ -35,7 +35,7 @@ const FOCUS = [
 const STATS = [
   { value: "1500+", num: 1500, suffix: "+", label: "Active Members",   sub: "across India"    },
   { value: "130+",  num: 130,  suffix: "+", label: "Projects Shipped", sub: "from apps to AI" },
-  { value: "100+",  num: 100,  suffix: "+", label: "Partner Schools",  sub: "and growing"     },
+  { value: "100+",  num: 100,  suffix: "+", label: "Partners",         sub: "and growing"     },
 ];
 
 
@@ -331,7 +331,7 @@ function Manifesto() {
             </motion.p>
           </div>
           <motion.p
-            className="text-stone/55 mt-8 max-w-sm text-sm leading-relaxed border-l-2 border-terracotta/50 pl-4"
+            className="text-white/70 mt-8 max-w-sm text-sm leading-relaxed border-l-2 border-terracotta/50 pl-4"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
@@ -475,7 +475,7 @@ function Impact() {
 const SPONSOR_SLOTS = [
   { type: "Title Sponsor",     bg: "bg-charcoal", text: "text-white",    sub: "text-white/30",  span: true,  phrases: ["Your brand here.", "Back the builders.", "Be the leading face.", "Shape what's next."] },
   { type: "Knowledge Partner", bg: "bg-cream-dim", text: "text-charcoal", sub: "text-stone/45",  span: false, phrases: ["Reach teen founders.", "Put your logo here.", "Kolkata's next wave.", "Invest in builders."] },
-  { type: "Community Partner", bg: "bg-tram/10",   text: "text-charcoal", sub: "text-tram/55",   span: false, phrases: ["Be part of this.", "Every event. Your name.", "High-agency audience.", "Partner with us."] },
+  { type: "Community Partner", bg: "bg-tram/10",   text: "text-white",    sub: "text-tram/75",   span: false, phrases: ["Be part of this.", "Every event. Your name.", "High-agency audience.", "Partner with us."] },
 ];
 
 function SpinningSlot({ phrases, textClass, subClass }: { phrases: string[]; textClass: string; subClass: string }) {

@@ -171,7 +171,7 @@ export default function ContactPage() {
             <p className="font-display text-white" style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)" }}>
               Want to collaborate on an event?
             </p>
-            <p className="text-stone mt-3 text-sm">
+            <p className="text-white/65 mt-3 text-sm">
               We&apos;re always open to partnerships, sponsorships, and co-organization.
             </p>
             <a

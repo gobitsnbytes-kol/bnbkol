@@ -353,7 +353,7 @@ export default function CoCPage() {
                 SOMETHING WRONG?<br />
                 <span className="text-terracotta">TELL US.</span>
               </h2>
-              <p className="text-stone/55 text-sm mt-4 max-w-sm leading-relaxed">
+              <p className="text-white/65 text-sm mt-4 max-w-sm leading-relaxed">
                 Don&apos;t ignore it. Your report stays 100% confidential. We&apos;ll handle it calmly and fairly.
               </p>
             </motion.div>

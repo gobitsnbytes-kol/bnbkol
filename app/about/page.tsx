@@ -244,7 +244,7 @@ export default function AboutPage() {
                     src={member.image}
                     alt={member.name}
                     fill
-                    className="object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500"
+                    className="object-cover object-top grayscale-0 sm:grayscale sm:group-hover:grayscale-0 transition-all duration-500"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
@@ -334,7 +334,7 @@ export default function AboutPage() {
               Want to be part<br />
               <span className="text-terracotta">of this?</span>
             </p>
-            <p className="text-stone/70 mt-5 max-w-sm text-sm leading-relaxed">
+            <p className="text-white/65 mt-5 max-w-sm text-sm leading-relaxed">
               We&apos;re always looking for builders, designers, and community leaders
               who want to make something real.
             </p>

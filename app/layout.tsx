@@ -76,7 +76,7 @@ const orgJsonLd = {
   url: "https://gobitsnbytes.org",
   logo: "https://gobitsnbytes.org/logo-kolkata.png",
   description: "Teen-led code club in Kolkata running hackathons, workshops, and build sessions.",
-  foundingDate: "2024",
+  foundingDate: "2025",
   address: { "@type": "PostalAddress", addressLocality: "Kolkata", addressRegion: "West Bengal", addressCountry: "IN" },
   sameAs: [
     "https://www.linkedin.com/company/gobitsbytes",
