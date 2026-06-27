@@ -1,14 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Github, Linkedin, Instagram, Mail } from "lucide-react";
+import { Github, Linkedin, Instagram, Mail, ArrowUpRight } from "lucide-react";
 
 const NAV = [
   { href: "/about",   label: "About"           },
   { href: "/events",  label: "Events"          },
   { href: "/join",    label: "Join"            },
-  { href: "/coc",     label: "Code of Conduct" },
   { href: "/contact", label: "Contact"         },
 ];
+
+const COC_URL = "https://gobitsnbytes.org/coc";
 
 const SOCIALS = [
   { href: "https://github.com/gobitsnbytes-kol",            label: "GitHub",    icon: Github    },
@@ -67,6 +68,16 @@ export function Footer() {
               </Link>
             </div>
           ))}
+          <div>
+            <a
+              href={COC_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-sm text-white/48 hover:text-white transition-colors duration-200"
+            >
+              Code of Conduct <ArrowUpRight className="w-3 h-3" />
+            </a>
+          </div>
         </nav>
 
         <div className="space-y-3">
@@ -103,16 +114,45 @@ export function Footer() {
         </div>
       </div>
 
+      {/* Org clarification */}
+      <div className="shell pb-8">
+        <div className="rounded-xl border border-white/6 bg-white/[0.02] px-6 py-5 max-w-3xl">
+          <p className="text-[0.52rem] font-mono font-bold uppercase tracking-[0.3em] text-stone/32 mb-2">
+            Organization
+          </p>
+          <p className="text-white/40 text-xs leading-relaxed">
+            <span className="text-white/65 font-semibold">bits&amp;bytes™</span> is a
+            national network of students and builders. It is operated by{" "}
+            <a
+              href="https://gobitsnbytes.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/55 hover:text-terracotta underline decoration-white/15 underline-offset-2 transition-colors"
+            >
+              GOBITSNBYTES FOUNDATION
+            </a>
+            , a Section 8 non-profit company registered in India that serves as the
+            parent organization supporting this network. Bits&amp;Bytes Kolkata is a
+            recognized fork of the bits&amp;bytes™ network.
+          </p>
+        </div>
+      </div>
+
       {/* Bottom bar */}
       <div className="border-t border-white/5">
         <div className="shell py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-stone/32 font-mono">
-            © 2026 Bits&Bytes Kolkata · gobitsnbytes.org
+            © 2026 GOBITSNBYTES FOUNDATION · All rights reserved · gobitsnbytes.org
           </p>
           <div className="flex items-center gap-5">
-            <Link href="/coc" className="text-xs text-stone/28 hover:text-stone/60 transition-colors">
-              Code of Conduct
-            </Link>
+            <a
+              href={COC_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-stone/28 hover:text-stone/60 transition-colors inline-flex items-center gap-1"
+            >
+              Code of Conduct <ArrowUpRight className="w-3 h-3" />
+            </a>
             <a
               href="https://github.com/gobitsnbytes-kol"
               target="_blank"

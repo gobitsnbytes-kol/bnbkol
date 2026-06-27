@@ -1,13 +1,13 @@
 # bits&bytes Kolkata
 
 > Teen-led builders club in Kolkata, West Bengal, India.
-> A city-chapter (Fork) of the bits&bytes™ network, run entirely by students.
+> A city-fork of the bits&bytes™ network, run entirely by students.
 > Website: https://gobitsnbytes.org · Email: kolkata@gobitsnbytes.org
 
 ## What We Are
 bits&bytes Kolkata is for high-agency teen builders who want to ship real things — not attend lectures. We run hackathons, build nights, and workshops for students aged 13–19. Fully student-led, always free to join.
 
-The Kolkata chapter is led by Shoryavardhaan Gupta (Fork Lead), with co-founders from the broader bits&bytes network lending technical and creative direction.
+The Kolkata fork is led by Shoryavardhaan Gupta (Fork Lead), with co-founders from the broader bits&bytes network lending technical and creative direction.
 
 ## Quick Facts
 - Members: 1500+ across India
@@ -52,7 +52,7 @@ The Kolkata chapter is led by Shoryavardhaan Gupta (Fork Lead), with co-founders
 ## How to Join
 Two tracks — both free:
 1. **Community member** — Join the Discord, attend events, build things. No application, open to any teen.
-2. **Working team** — Help organize and run the chapter. Selective, requires an application.
+2. **Working team** — Help organize and run the fork. Selective, requires an application.
 Apply at: https://gobitsnbytes.org/join
 
 ## Contact & Socials

@@ -42,7 +42,18 @@ const STORY = [
   },
 ];
 
-const CORE_TEAM = [
+type Member = {
+  name: string;
+  role: string;
+  dept: string;
+  image?: string;
+  initials?: string;
+  accent?: string;
+  bio: string;
+};
+
+// The people actively building the Kolkata fork on the ground.
+const PEOPLE_BUILDING: Member[] = [
   {
     name: "Shoryavardhaan Gupta",
     role: "Kolkata Fork Lead",
@@ -50,6 +61,26 @@ const CORE_TEAM = [
     image: "/team/shorya.png",
     bio: "Founded Bits&Bytes Kolkata. Driving the city's identity as a hub for high-agency teen builders.",
   },
+  {
+    name: "Vaibhav Thakkar",
+    role: "Ops & Creative Contributor",
+    dept: "Operations",
+    image: "/team/Vaibhav.jpeg",
+    bio: "Drives operational and creative initiatives for Bits&Bytes Kolkata — keeping events tight, brand consistent, and the community energy high.",
+  },
+  {
+    name: "Atharva Upadhyay",
+    role: "Ops Lead, Kolkata Fork",
+    dept: "Operations",
+    initials: "AU",
+    accent: "#C5312E",
+    bio: "Heads on-the-ground operations for the Kolkata fork — coordinating logistics, community workflows, and cross-team execution.",
+  },
+];
+
+// Co-founders and core team from the upstream bits&bytes™ network who lend
+// technical and creative direction to the Kolkata fork.
+const UPSTREAM_FOUNDERS: Member[] = [
   {
     name: "Akshat Kushwaha",
     role: "Co-Founder & Technical Lead",
@@ -94,26 +125,49 @@ const CORE_TEAM = [
   },
 ];
 
-const CONTRIBUTORS = [
-  {
-    name: "Vaibhav Thakkar",
-    role: "Ops & Creative Contributor",
-    initials: "VT",
-    color: "#5B9AE8",
-    bg: "rgba(91,154,232,0.07)",
-    border: "rgba(91,154,232,0.18)",
-    bio: "Drives operational and creative initiatives for Bits&Bytes Kolkata — keeping events tight, brand consistent, and the community energy high.",
-  },
-  {
-    name: "Atharva Upadhyay",
-    role: "Ops Lead, Kolkata Fork",
-    initials: "AU",
-    color: "#C5312E",
-    bg: "rgba(197,49,46,0.06)",
-    border: "rgba(197,49,46,0.18)",
-    bio: "Heads on-the-ground operations for the Kolkata fork — coordinating logistics, community workflows, and cross-team execution.",
-  },
-];
+function TeamCard({ member, i }: { member: Member; i: number }) {
+  return (
+    <motion.div
+      variants={fadeUp}
+      transition={{ delay: i * 0.07 }}
+      className="group rounded-2xl border border-charcoal/8 bg-white overflow-hidden hover:border-terracotta/22 hover:shadow-[0_8px_40px_rgba(197,49,46,0.07)] transition-all duration-300"
+    >
+      <div className="relative aspect-square bg-cream-dim overflow-hidden">
+        {member.image ? (
+          <Image
+            src={member.image}
+            alt={member.name}
+            fill
+            className="object-cover object-top grayscale-0 sm:grayscale sm:group-hover:grayscale-0 transition-all duration-500"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+        ) : (
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{
+              background: `linear-gradient(135deg, ${member.accent}1A, ${member.accent}08)`,
+            }}
+          >
+            <span
+              className="font-display select-none"
+              style={{ color: `${member.accent}66`, fontSize: "clamp(3.5rem, 8vw, 5.5rem)" }}
+            >
+              {member.initials}
+            </span>
+          </div>
+        )}
+      </div>
+      <div className="p-5">
+        <p className={`text-[0.52rem] font-mono font-bold uppercase tracking-[0.28em] mb-1.5 ${DEPT_COLOR[member.dept]}`}>
+          {member.dept}
+        </p>
+        <h3 className="font-display text-xl text-charcoal leading-tight">{member.name}</h3>
+        <p className="text-stone text-xs mt-1 leading-snug">{member.role}</p>
+        <p className="text-stone/60 text-xs mt-3 leading-relaxed">{member.bio}</p>
+      </div>
+    </motion.div>
+  );
+}
 
 const DEPT_COLOR: Record<string, string> = {
   Leadership: "text-tram",
@@ -215,7 +269,7 @@ export default function AboutPage() {
         <div className="h-px w-full bg-charcoal/10" />
       </div>
 
-      {/* Team */}
+      {/* People Building This */}
       <section className="shell py-24 sm:py-32">
         <FadeSection>
           <motion.div variants={fadeUp} className="mb-14">
@@ -228,80 +282,43 @@ export default function AboutPage() {
             >
               THE PEOPLE<br />BUILDING THIS.
             </h2>
+            <p className="text-stone text-sm mt-5 max-w-md leading-relaxed">
+              The crew on the ground in Kolkata — running the fork day to day.
+            </p>
           </motion.div>
 
-          {/* All team members — equal grid */}
+          {/* People building — equal grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {CORE_TEAM.map((member, i) => (
-              <motion.div
-                key={member.name}
-                variants={fadeUp}
-                transition={{ delay: i * 0.07 }}
-                className="group rounded-2xl border border-charcoal/8 bg-white overflow-hidden hover:border-terracotta/22 hover:shadow-[0_8px_40px_rgba(197,49,46,0.07)] transition-all duration-300"
-              >
-                <div className="relative aspect-square bg-cream-dim overflow-hidden">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-cover object-top grayscale-0 sm:grayscale sm:group-hover:grayscale-0 transition-all duration-500"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                </div>
-                <div className="p-5">
-                  <p className={`text-[0.52rem] font-mono font-bold uppercase tracking-[0.28em] mb-1.5 ${DEPT_COLOR[member.dept]}`}>
-                    {member.dept}
-                  </p>
-                  <h3 className="font-display text-xl text-charcoal leading-tight">{member.name}</h3>
-                  <p className="text-stone text-xs mt-1 leading-snug">{member.role}</p>
-                  <p className="text-stone/60 text-xs mt-3 leading-relaxed">{member.bio}</p>
-                </div>
-              </motion.div>
+            {PEOPLE_BUILDING.map((member, i) => (
+              <TeamCard key={member.name} member={member} i={i} />
             ))}
           </div>
         </FadeSection>
       </section>
 
-      {/* Contributors */}
+      {/* Founders from Upstream */}
       <section className="py-16 sm:py-24 bg-cream-dim">
         <div className="shell">
           <FadeSection>
             <motion.div variants={fadeUp} className="mb-10">
               <p className="text-[0.58rem] font-mono font-bold tracking-[0.42em] uppercase text-stone/50 mb-3">
-                Contributors
+                From the Network
               </p>
               <h2
                 className="font-display text-charcoal leading-[0.9]"
                 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)" }}
               >
-                ALSO BUILDING THIS.
+                FOUNDERS FROM UPSTREAM.
               </h2>
               <p className="text-stone text-sm mt-4 max-w-md leading-relaxed">
-                Key contributors who make the Kolkata chapter what it is.
+                Co-founders and core team from the broader bits&amp;bytes™ network
+                who lend technical and creative direction to the Kolkata fork.
               </p>
             </motion.div>
 
-            <div className="grid sm:grid-cols-2 gap-5 max-w-2xl">
-              {CONTRIBUTORS.map((c, i) => (
-                <motion.div
-                  key={c.name}
-                  variants={fadeUp}
-                  transition={{ delay: i * 0.1 }}
-                  className="group rounded-2xl border p-7 hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)] transition-all duration-300"
-                  style={{ background: c.bg, borderColor: c.border }}
-                >
-                  <div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-xl font-bold text-white select-none mb-5 shadow-sm"
-                    style={{ background: c.color }}
-                  >
-                    {c.initials}
-                  </div>
-                  <p className="font-mono text-[0.52rem] font-bold uppercase tracking-[0.28em] mb-2" style={{ color: c.color }}>
-                    {c.role}
-                  </p>
-                  <h3 className="font-display text-charcoal text-2xl leading-tight mb-3">{c.name}</h3>
-                  <p className="text-stone text-sm leading-relaxed">{c.bio}</p>
-                </motion.div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {UPSTREAM_FOUNDERS.map((member, i) => (
+                <TeamCard key={member.name} member={member} i={i} />
               ))}
             </div>
           </FadeSection>

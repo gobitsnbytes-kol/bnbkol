@@ -36,7 +36,7 @@ const COMMUNITY_PERKS = [
 const TEAM_PERKS = [
   "Help organize and run Kolkata's flagship tech events",
   "Lead real initiatives — from workshops to hackathons",
-  "Work with the founding team on chapter strategy",
+  "Work with the founding team on fork strategy",
   "Build something that outlasts you as a student",
 ];
 
@@ -50,7 +50,7 @@ const TEAM_EXPECTATIONS = [
 const FAQS = [
   {
     q: "What's the difference between a community member and a working team member?",
-    a: "Community members join the Discord, attend events, and collaborate with other builders — no application needed, open to any teen. The working team is the core crew that actually organizes and runs the chapter. That's selective and requires an application.",
+    a: "Community members join the Discord, attend events, and collaborate with other builders — no application needed, open to any teen. The working team is the core crew that actually organizes and runs the fork. That's selective and requires an application.",
   },
   {
     q: "Do I need coding experience to join the community?",
@@ -181,7 +181,7 @@ export default function JoinPage() {
                   Working Team
                 </h2>
                 <p className="text-stone text-sm mt-3 leading-relaxed">
-                  Help run the chapter. Organize events, lead initiatives, build the org itself. We review every application.
+                  Help run the fork. Organize events, lead initiatives, build the org itself. We review every application.
                 </p>
               </div>
               <div className="px-8 py-7 flex flex-col flex-1">

@@ -162,5 +162,5 @@ A (user): "in leadership section keep shorya then akshat then yash then everyone
 - "Kolkata design" meant editorial/print-inspired with tram track motifs, not just applying the color palette to the same template layout
 - The `dot-grid` and tram lines in the original concept were too subtle to read as intentional design — the user's "not visible" comment confirmed this
 - Color contrast failure on `stone` (#8A8178) was discovered via calculation, not user-reported — but user's "color contrast" mention suggests they noticed readability issues
-- The parent Bits&Bytes org site is at gobitsnbytes.org; the Kolkata fork is a city chapter
+- The parent Bits&Bytes org site is at gobitsnbytes.org; the Kolkata fork is a city fork
 - "Everyone else" in team order means Aadrika, Devaansh, Maryam, Sristhi (no further ordering preference was given, left as-was)

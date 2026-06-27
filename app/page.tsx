@@ -40,10 +40,9 @@ const STATS = [
 
 
 const VOICES = [
-  { quote: "Leading this community has shown me that there's no limit to what ambitious teens can achieve when they have the right ecosystem to build in.",   author: "Yash Singh",      role: "Co-Founder & Organisation Lead"        },
+  { quote: "The Kolkata fork is run by some of the youngest people, and we're building something crazy here.",   author: "Shoryavardhaan Gupta",      role: "Fork Lead, Kolkata"        },
   { quote: "We're crafting a brand that represents the future of Indian tech — bold, creative, and unapologetically teen-led.",                                author: "Aadrika Maurya",  role: "Co-Founder & Chief Creative Strategist" },
   { quote: "The systems we're building here are the backbone that lets every member ship their wildest ideas with confidence.",                                 author: "Akshat Kushwaha", role: "Co-Founder & Technical Lead"            },
-  { quote: "Running the technical side of a 48-hour hackathon at 17 is not something most people get to do. Bits&Bytes gave me that shot.",                    author: "Aditya Bera",     role: "Technical Lead"                         },
   { quote: "Telling our story isn't just about social media — it's about inspiring every teen in India to stop consuming and start building their own future.", author: "Maryam Fatima",   role: "Social Media & Promotions Head"         },
 ];
 
@@ -106,11 +105,6 @@ const PARTICLES = [
 function Hero() {
   const heroRef = useRef<HTMLElement>(null);
 
-  const bx = useMotionValue(0);
-  const by = useMotionValue(0);
-  const sbx = useSpring(bx, { stiffness: 55, damping: 22 });
-  const sby = useSpring(by, { stiffness: 55, damping: 22 });
-
   const birdX = useMotionValue(0);
   const birdY = useMotionValue(0);
   const sBirdX = useSpring(birdX, { stiffness: 36, damping: 16 });
@@ -121,8 +115,6 @@ function Hero() {
     if (!rect) return;
     const cx = (e.clientX - rect.left) / rect.width - 0.5;
     const cy = (e.clientY - rect.top) / rect.height - 0.5;
-    bx.set(cx * 14);
-    by.set(cy * 8);
     birdX.set(cx * 26);
     birdY.set(cy * 16);
   };
@@ -152,11 +144,8 @@ function Hero() {
         ))}
       </div>
 
-      {/* Bridge — parallax outer, entrance inner */}
-      <motion.div
-        className="absolute bottom-0 right-0 w-full lg:w-[72%] pointer-events-none select-none"
-        style={{ x: sbx, y: sby }}
-      >
+      {/* Bridge — static, entrance animation only */}
+      <div className="absolute bottom-0 right-0 w-full lg:w-[72%] pointer-events-none select-none">
         <div style={{ animation: "hero-slide-in 1.1s cubic-bezier(0.22,1,0.36,1) 0.2s both" }}>
           <Image
             src="/hero/howrah-bridge.png"
@@ -168,7 +157,7 @@ function Hero() {
             priority
           />
         </div>
-      </motion.div>
+      </div>
 
       {/* Birds — more parallax, float inner */}
       <motion.div
@@ -269,21 +258,6 @@ function Hero() {
             >
               See our events
             </Link>
-          </div>
-
-          {/* Stats strip */}
-          <div
-            className="flex flex-wrap gap-8 pt-6 border-t border-charcoal/8"
-            style={{ animation: "hero-fade 0.6s ease 0.88s both" }}
-          >
-            {STATS.map((s) => (
-              <div key={s.label}>
-                <p className="font-display text-charcoal text-3xl leading-none">{s.value}</p>
-                <p className="font-mono text-[0.58rem] font-bold uppercase tracking-[0.22em] text-tram mt-1.5">
-                  {s.label}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </div>
@@ -783,8 +757,9 @@ export default function HomePage() {
       <Manifesto />
       <Ticker />
       <FocusAreas />
-      <Impact />
-      <Partners />
+      {/* TODO: Re-enable when we have real, verified impact data.
+          <Impact />      ← "The Numbers" stats section
+          <Partners />    ← "Who Backs Us" sponsor/partner section */}
       <Voices />
       <JoinCTA />
       <SponsorCTA />

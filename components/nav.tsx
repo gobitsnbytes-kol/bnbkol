@@ -13,8 +13,9 @@ const NAV_LINKS = [
   { href: "/about", label: "About" },
   { href: "/events", label: "Events" },
   { href: "/join", label: "Join" },
-  { href: "/coc", label: "CoC" },
-];
+] as const;
+
+const COC_URL = "https://gobitsnbytes.org/coc";
 
 const JOIN_URL = "https://gusty-servant-a11.notion.site/357d1148777a8007af72ee9b4a54546a?pvs=105";
 
@@ -76,6 +77,14 @@ export function Nav() {
               </Link>
             );
           })}
+          <a
+            href={COC_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 py-1.5 text-sm font-medium rounded-full text-stone hover:text-charcoal hover:bg-charcoal/4 transition-colors duration-200"
+          >
+            CoC
+          </a>
         </nav>
 
         {/* Desktop CTA */}
@@ -124,6 +133,14 @@ export function Nav() {
                   {link.label}
                 </Link>
               ))}
+              <a
+                href={COC_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2.5 rounded-xl text-base font-medium text-stone hover:text-charcoal hover:bg-charcoal/4 transition-colors flex items-center justify-between"
+              >
+                CoC <ArrowUpRight className="w-4 h-4" />
+              </a>
               <a
                 href={JOIN_URL}
                 target="_blank"
