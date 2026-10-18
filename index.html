@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bits&amp;Bytes Kolkata · Kolkata's teen builder community</title>
+<meta name="description" content="Kolkata's teen builder community. Hackathons, build nights and workshops. City of Joy, City of Builders.">
+<meta name="theme-color" content="#F3EAD3">
+<link rel="icon" type="image/png" href="/assets/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,600&family=Galada&family=Hind+Siliguri:wght@500;600&family=Instrument+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<a class="skip" href="#view">Skip to content</a>
+
+<!-- alpona loader (first visit only) -->
+<div class="loader" aria-hidden="true">
+  <div class="loader__mark">
+    <svg class="alpona" viewBox="-100 -100 200 200"></svg>
+    <img class="loader__logo" src="/assets/logo-mark.png" alt="" width="256" height="256">
+  </div>
+  <p class="loader__word" lang="bn">কলকাতা</p>
+</div>
+
+<!-- page transition: tram destination blind -->
+<div class="blind" aria-hidden="true">
+  <div class="blind__plate">
+    <span class="blind__no">01</span>
+    <span class="blind__to">Home</span>
+    <span class="blind__bn" lang="bn">শুরু</span>
+  </div>
+</div>
+
+<div class="progress" aria-hidden="true"></div>
+
+<!-- route rail: stops of the current page -->
+<nav class="route" aria-label="Sections on this page">
+  <div class="route__track"><div class="route__fill"></div></div>
+  <ol class="route__stops"></ol>
+</nav>
+
+<header class="nav">
+  <a class="nav__brand" href="/" aria-label="Bits&amp;Bytes Kolkata, home">
+    <img class="nav__logo" src="/assets/logo-mark.png" alt="" width="44" height="44">
+    <span class="nav__city">Kolkata <span lang="bn">কলকাতা</span></span>
+  </a>
+  <ul class="nav__tabs">
+    <li><a href="/about" style="--tab:var(--taxi)">About</a></li>
+    <li><a href="/events" style="--tab:var(--tram)">Events</a></li>
+    <li><a href="/join" style="--tab:var(--ganga);--tab-ink:var(--rice)">Join</a></li>
+    <li><a href="/contact" style="--tab:var(--marigold)">Contact</a></li>
+    <li><a href="https://gobitsnbytes.org/coc" style="--tab:var(--rice)">CoC <span aria-hidden="true">↗</span></a></li>
+  </ul>
+  <a class="btn btn--sindoor nav__cta" href="https://gusty-servant-a11.notion.site/357d1148777a8007af72ee9b4a54546a?pvs=105">Join now <span aria-hidden="true">↗</span></a>
+  <button class="nav__menu" type="button" aria-expanded="false" aria-controls="sheet">Menu</button>
+</header>
+<nav class="sheet" id="sheet" aria-label="Menu" hidden>
+  <a href="/" style="--tab:var(--rice)">Home <span lang="bn">শুরু</span></a>
+  <a href="/about" style="--tab:var(--taxi)">About <span lang="bn">আমরা</span></a>
+  <a href="/events" style="--tab:var(--tram)">Events <span lang="bn">ইভেন্ট</span></a>
+  <a href="/join" style="--tab:var(--ganga);--tab-ink:var(--rice)">Join <span lang="bn">যোগ দাও</span></a>
+  <a href="/contact" style="--tab:var(--marigold)">Contact <span lang="bn">নমস্কার</span></a>
+  <div class="sheet__foot">
+    <a class="btn btn--sindoor" href="https://gusty-servant-a11.notion.site/357d1148777a8007af72ee9b4a54546a?pvs=105">Join now ↗</a>
+    <a class="sheet__coc" href="https://gobitsnbytes.org/coc">Code of Conduct ↗</a>
+  </div>
+</nav>
+
+<main id="view" tabindex="-1"></main>
+
+<a class="nextstop" href="/about">
+  <span class="nextstop__label">Next stop</span>
+  <span class="nextstop__name"><span class="nextstop__no">02</span><b>About</b><span class="nextstop__bn" lang="bn">আমরা</span></span>
+  <span class="nextstop__arrow" aria-hidden="true">→</span>
+</a>
+
+<footer class="foot">
+  <div class="foot__top">
+    <div class="foot__hello">
+      <p class="foot__kicker"><span lang="bn">চলো, কথা বলি।</span> Let's talk.</p>
+      <a class="foot__mail" href="mailto:kolkata@gobitsnbytes.org">kolkata@gobitsnbytes.org</a>
+      <div class="plate-addr">
+        <div class="plate-addr__text">
+          <span class="plate-addr__top">Bits &amp; Bytes · Kolkata Fork</span>
+          <span class="plate-addr__mid">Teen builder community</span>
+          <span class="plate-addr__bot">Kolkata, West Bengal · <span lang="bn">কলকাতা</span></span>
+        </div>
+      </div>
+    </div>
+    <nav class="foot__cols" aria-label="Footer">
+      <ul>
+        <li class="foot__h">Pages</li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/events">Events</a></li>
+        <li><a href="/join">Join</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+      <ul>
+        <li class="foot__h">Elsewhere</li>
+        <li><a href="https://github.com/gobitsnbytes-kol">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/company/gobitsbytes">LinkedIn</a></li>
+        <li><a href="https://www.instagram.com/gobitsnbytes.kolkata">Instagram</a></li>
+        <li><a href="https://gobitsnbytes.org/coc">Code of Conduct</a></li>
+        <li><a href="https://gobitsnbytes.org/">bits&amp;bytes™ foundation</a></li>
+      </ul>
+    </nav>
+  </div>
+  <p class="foot__word" aria-hidden="true"><span>Bits</span><img class="foot__logo" src="/assets/logo-mark.png" alt="" width="256" height="256" loading="lazy"><span>Bytes</span></p>
+  <div class="foot__track" aria-hidden="true"></div>
+  <div class="foot__base">
+    <p>© 2026 Bits&amp;Bytes Kolkata. A teen-led fork of <a href="https://gobitsnbytes.org/">bits&amp;bytes™</a>.</p>
+    <button class="foot__up" type="button">Back to top <span aria-hidden="true">↑</span></button>
+  </div>
+</footer>
+
+<p class="sr-only" id="announcer" aria-live="polite"></p>
+<div class="grain" aria-hidden="true"></div>
+
+<noscript><p class="noscript">This site needs JavaScript to load its pages. Email <a href="mailto:kolkata@gobitsnbytes.org">kolkata@gobitsnbytes.org</a>.</p></noscript>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script type="module" src="/js/main.js"></script>
+</body>
+</html>
